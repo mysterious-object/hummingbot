@@ -26,6 +26,7 @@ from hummingbot.client.ui.keybindings import load_key_bindings
 from hummingbot.client.ui.parser import ThrowingArgumentParser, load_parser
 from hummingbot.connector.exchange_base import ExchangeBase
 from hummingbot.core.trading_core import TradingCore
+from hummingbot.core.utils.async_utils import safe_ensure_future
 from hummingbot.core.utils.trading_pair_fetcher import TradingPairFetcher
 from hummingbot.exceptions import ArgumentParserError
 from hummingbot.logger import HummingbotLogger
@@ -76,6 +77,9 @@ class HummingbotApplication(*commands):
         # MQTT management
         self._mqtt: Optional[MQTTGateway] = None
 
+        # API server management
+        self._api_server_task: Optional[asyncio.Task] = None
+
         # Script configuration support
         self.script_config: Optional[str] = None
 
@@ -91,6 +95,10 @@ class HummingbotApplication(*commands):
         # MQTT Bridge (always available in both modes)
         if self.client_config_map.mqtt_bridge.mqtt_autostart:
             self.mqtt_start()
+
+        # REST API Server (always available in both modes)
+        if self.client_config_map.api.api_enabled:
+            self._start_api_server()
 
     def _init_ui_components(self):
         """Initialize UI components (CLI, parser, etc.) for non-headless mode."""
@@ -246,6 +254,7 @@ class HummingbotApplication(*commands):
             self.logger().error(f"Error in headless mode: {e}")
             raise
         finally:
+            await self._stop_api_server()
             await self.trading_core.shutdown()
 
     def add_application_warning(self, app_warning: ApplicationWarning):
@@ -280,3 +289,21 @@ class HummingbotApplication(*commands):
 
     def save_client_config(self):
         save_to_yml(CLIENT_CONFIG_PATH, self.client_config_map)
+
+    def _start_api_server(self):
+        """Start the REST API server."""
+        from hummingbot.api import start_api_server
+        api_config = self.client_config_map.api
+        self._api_server_task = safe_ensure_future(
+            start_api_server(api_config.api_host, api_config.api_port)
+        )
+        self.logger().info(f"REST API server starting on {api_config.api_host}:{api_config.api_port}")
+
+    async def _stop_api_server(self):
+        """Stop the REST API server."""
+        if self._api_server_task is not None:
+            from hummingbot.api import stop_api_server
+            await stop_api_server()
+            self._api_server_task.cancel()
+            self._api_server_task = None
+            self.logger().info("REST API server stopped")

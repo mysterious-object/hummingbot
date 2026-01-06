@@ -89,6 +89,22 @@ class MQTTBridgeConfigMap(BaseClientModel):
     model_config = ConfigDict(title="mqtt_bridge")
 
 
+class APIConfigMap(BaseClientModel):
+    api_enabled: bool = Field(
+        default=False,
+        json_schema_extra={"prompt": lambda cm: "Enable/Disable REST API server"},
+    )
+    api_host: str = Field(
+        default="0.0.0.0",
+        json_schema_extra={"prompt": lambda cm: "Set the API server host (e.g. 0.0.0.0)"},
+    )
+    api_port: int = Field(
+        default=8000,
+        json_schema_extra={"prompt": lambda cm: "Set the API server port (e.g. 8000)"},
+    )
+    model_config = ConfigDict(title="api")
+
+
 class MarketDataCollectionConfigMap(BaseClientModel):
     market_data_collection_enabled: bool = Field(
         default=False,
@@ -710,6 +726,10 @@ class ClientConfigMap(BaseClientModel):
     mqtt_bridge: MQTTBridgeConfigMap = Field(
         default=MQTTBridgeConfigMap(),
         description=('MQTT Bridge configuration.'),
+    )
+    api: APIConfigMap = Field(
+        default=APIConfigMap(),
+        description=('REST API server configuration.'),
     )
     send_error_logs: bool = Field(
         default=True,
