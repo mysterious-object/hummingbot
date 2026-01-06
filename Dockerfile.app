@@ -56,7 +56,7 @@ COPY conf/ ./conf/
 
 # Install Python dependencies
 RUN pip install --upgrade pip setuptools wheel && \
-    pip install uvicorn fastapi aiofiles && \
+    pip install uvicorn fastapi aiofiles ptpython && \
     pip install -e .
 
 # Copy the built frontend from stage 1
