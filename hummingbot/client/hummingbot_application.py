@@ -226,23 +226,32 @@ class HummingbotApplication(*commands):
             await self.app.run()
 
     async def run_headless(self):
-        """Run in headless mode - just keep alive for MQTT/strategy execution."""
+        """Run in headless mode - just keep alive for API/MQTT/strategy execution."""
         try:
             self.logger().info("Starting Hummingbot in headless mode...")
 
-            # Validate MQTT is enabled for headless mode
-            if not self.client_config_map.mqtt_bridge.mqtt_autostart:
+            # Validate that at least one control interface is enabled
+            mqtt_enabled = self.client_config_map.mqtt_bridge.mqtt_autostart
+            api_enabled = self.client_config_map.api.api_enabled
+
+            if not mqtt_enabled and not api_enabled:
                 error_msg = (
-                    "ERROR: MQTT must be enabled for headless mode!\n"
-                    "Without MQTT, there would be no way to control the bot.\n"
-                    "Please enable MQTT by setting 'mqtt_autostart: true' in your config file.\n"
-                    "You can also start it manually with 'mqtt start' before switching to headless mode."
+                    "ERROR: Either MQTT or API must be enabled for headless mode!\n"
+                    "Without a control interface, there would be no way to control the bot.\n"
+                    "Please enable one of the following in your config file:\n"
+                    "  - API: Set 'api_enabled: true' under the 'api' section\n"
+                    "  - MQTT: Set 'mqtt_autostart: true' under the 'mqtt_bridge' section"
                 )
                 self.logger().error(error_msg)
-                raise RuntimeError("MQTT is required for headless mode")
+                raise RuntimeError("MQTT or API is required for headless mode")
 
-            self.logger().info("MQTT enabled - waiting for MQTT commands...")
-            self.logger().info("Bot is ready to receive commands via MQTT")
+            if api_enabled:
+                api_config = self.client_config_map.api
+                self.logger().info(f"API server enabled at http://{api_config.api_host}:{api_config.api_port}")
+            if mqtt_enabled:
+                self.logger().info("MQTT enabled - waiting for MQTT commands...")
+
+            self.logger().info("Bot is ready to receive commands")
 
             # Keep running until shutdown
             while True:

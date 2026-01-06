@@ -1,0 +1,136 @@
+#!/bin/bash
+
+# Start Hummingbot with API in headless mode and launch the web app
+# This script starts the hummingbot backend and the Tauri web frontend
+
+set -e
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+APP_DIR="$SCRIPT_DIR/hummingbot-app"
+
+# Colors for output
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+BLUE='\033[0;34m'
+NC='\033[0m' # No Color
+
+echo -e "${BLUE}========================================${NC}"
+echo -e "${BLUE}       Hummingbot App Launcher          ${NC}"
+echo -e "${BLUE}========================================${NC}"
+
+# Check if conf_client.yml has api_enabled
+CONFIG_FILE="$SCRIPT_DIR/conf/conf_client.yml"
+if [ -f "$CONFIG_FILE" ]; then
+    if ! grep -q "api_enabled: true" "$CONFIG_FILE" 2>/dev/null; then
+        echo -e "${YELLOW}Warning: API may not be enabled in conf_client.yml${NC}"
+        echo -e "${YELLOW}Make sure you have the following in your config:${NC}"
+        echo -e "  api:"
+        echo -e "    api_enabled: true"
+        echo -e "    api_host: \"0.0.0.0\""
+        echo -e "    api_port: 8000"
+        echo ""
+    fi
+fi
+
+# Function to cleanup background processes on exit
+cleanup() {
+    echo -e "\n${YELLOW}Shutting down...${NC}"
+    if [ ! -z "$HUMMINGBOT_PID" ]; then
+        echo -e "Stopping Hummingbot (PID: $HUMMINGBOT_PID)..."
+        kill $HUMMINGBOT_PID 2>/dev/null || true
+    fi
+    if [ ! -z "$WEBAPP_PID" ]; then
+        echo -e "Stopping Web App (PID: $WEBAPP_PID)..."
+        kill $WEBAPP_PID 2>/dev/null || true
+    fi
+    echo -e "${GREEN}Shutdown complete.${NC}"
+    exit 0
+}
+
+trap cleanup SIGINT SIGTERM
+
+# Start Hummingbot in headless mode
+echo -e "${GREEN}Starting Hummingbot in headless mode...${NC}"
+cd "$SCRIPT_DIR"
+
+# Check if conda environment exists
+if command -v conda &> /dev/null; then
+    source "$(conda info --base)/etc/profile.d/conda.sh"
+    conda activate hummingbot 2>/dev/null || true
+fi
+
+# Start hummingbot in background
+python bin/hummingbot_quickstart.py --headless &
+HUMMINGBOT_PID=$!
+echo -e "Hummingbot started with PID: $HUMMINGBOT_PID"
+
+# Wait for API to be ready
+echo -e "${YELLOW}Waiting for API server to start...${NC}"
+API_URL="http://localhost:8000/api/v1/health"
+MAX_ATTEMPTS=30
+ATTEMPT=0
+
+while [ $ATTEMPT -lt $MAX_ATTEMPTS ]; do
+    if curl -s "$API_URL" > /dev/null 2>&1; then
+        echo -e "${GREEN}API server is ready!${NC}"
+        break
+    fi
+    ATTEMPT=$((ATTEMPT + 1))
+    sleep 1
+done
+
+if [ $ATTEMPT -eq $MAX_ATTEMPTS ]; then
+    echo -e "${RED}Warning: API server did not respond within ${MAX_ATTEMPTS} seconds${NC}"
+    echo -e "${YELLOW}Continuing anyway... The app may show as disconnected.${NC}"
+fi
+
+# Start the web app
+echo -e "${GREEN}Starting Web App...${NC}"
+cd "$APP_DIR"
+
+# Check if node_modules exists
+if [ ! -d "node_modules" ]; then
+    echo -e "${YELLOW}Installing dependencies...${NC}"
+    if command -v pnpm &> /dev/null; then
+        pnpm install
+    elif command -v npm &> /dev/null; then
+        npm install
+    else
+        echo -e "${RED}Error: Neither pnpm nor npm found. Please install Node.js.${NC}"
+        cleanup
+    fi
+fi
+
+# Start vite dev server
+if command -v pnpm &> /dev/null; then
+    pnpm dev &
+else
+    npm run dev &
+fi
+WEBAPP_PID=$!
+echo -e "Web App started with PID: $WEBAPP_PID"
+
+# Wait a moment for vite to start
+sleep 3
+
+echo ""
+echo -e "${GREEN}========================================${NC}"
+echo -e "${GREEN}  Hummingbot App is now running!       ${NC}"
+echo -e "${GREEN}========================================${NC}"
+echo ""
+echo -e "  ${BLUE}Web App:${NC}     http://localhost:1420"
+echo -e "  ${BLUE}API Docs:${NC}    http://localhost:8000/docs"
+echo -e "  ${BLUE}API Health:${NC}  http://localhost:8000/api/v1/health"
+echo ""
+echo -e "${YELLOW}Press Ctrl+C to stop both services${NC}"
+echo ""
+
+# Open browser (macOS)
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    sleep 2
+    open "http://localhost:1420" 2>/dev/null || true
+fi
+
+# Wait for either process to exit
+wait $HUMMINGBOT_PID $WEBAPP_PID
