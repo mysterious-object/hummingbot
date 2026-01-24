@@ -535,3 +535,17 @@ class XRPLAPIOrderBookDataSource(OrderBookTrackerDataSource):
                     await self._close_subscription_connection(conn.client)
                 self._subscription_connections.clear()
             self.logger().debug("[SUBSCRIPTION] All subscription connections closed")
+
+    async def subscribe_to_trading_pair(self, trading_pair: str) -> bool:
+        """Dynamic subscription not supported for this connector."""
+        self.logger().warning(
+            f"Dynamic subscription not supported for {self.__class__.__name__}"
+        )
+        return False
+
+    async def unsubscribe_from_trading_pair(self, trading_pair: str) -> bool:
+        """Dynamic unsubscription not supported for this connector."""
+        self.logger().warning(
+            f"Dynamic unsubscription not supported for {self.__class__.__name__}"
+        )
+        return False
