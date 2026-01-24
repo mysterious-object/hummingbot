@@ -1543,8 +1543,9 @@ class XrplExchange(ExchangePyBase):
                             self._account_balances[currency] = absolute_value
 
                             # Calculate available balance = total - locked
+                            # Floor to 0 to handle race conditions where order tracker hasn't updated yet
                             locked = self._calculate_locked_balance_for_token(currency)
-                            new_available = absolute_value - locked
+                            new_available = max(Decimal("0"), absolute_value - locked)
                             self._account_available_balances[currency] = new_available
 
                             # Log the balance update
@@ -1572,8 +1573,9 @@ class XrplExchange(ExchangePyBase):
                                 self._account_balances[token_symbol] = absolute_value
 
                                 # Calculate available balance = total - locked
+                                # Floor to 0 to handle race conditions where order tracker hasn't updated yet
                                 locked = self._calculate_locked_balance_for_token(token_symbol)
-                                new_available = absolute_value - locked
+                                new_available = max(Decimal("0"), absolute_value - locked)
                                 self._account_available_balances[token_symbol] = new_available
 
                                 # Log the balance update
