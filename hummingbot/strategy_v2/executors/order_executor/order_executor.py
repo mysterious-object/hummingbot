@@ -122,8 +122,11 @@ class OrderExecutor(ExecutorBase):
                 self._held_position_orders.extend([order.order.to_json() for order in self._partial_filled_orders])
                 self.stop()
         else:
-            self._held_position_orders.extend([order.order.to_json() for order in self._partial_filled_orders])
-            self.close_type = CloseType.POSITION_HOLD
+            if self._partial_filled_orders:
+                self._held_position_orders.extend([order.order.to_json() for order in self._partial_filled_orders])
+                self.close_type = CloseType.POSITION_HOLD
+            else:
+                self.close_type = CloseType.EARLY_STOP
             self.stop()
         await self._sleep(5.0)
 
