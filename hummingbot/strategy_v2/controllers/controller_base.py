@@ -16,7 +16,6 @@ from hummingbot.strategy_v2.models.executor_actions import ExecutorAction
 from hummingbot.strategy_v2.models.executors_info import ExecutorInfo, PerformanceReport
 from hummingbot.strategy_v2.models.position_config import InitialPositionConfig
 from hummingbot.strategy_v2.runnable_base import RunnableBase
-from hummingbot.strategy_v2.utils.common import generate_unique_id
 
 if TYPE_CHECKING:
     from hummingbot.strategy_v2.executors.data_types import PositionSummary
@@ -28,11 +27,11 @@ class ControllerConfigBase(BaseClientModel):
     It inherits from the Pydantic BaseModel and includes several fields that are used to configure a controller.
 
     Attributes:
-        id (str): A unique identifier for the controller. If not provided, it will be automatically generated.
+        id (str): A unique identifier for the controller. Required.
         controller_name (str): The name of the trading strategy that the controller will use.
         candles_config (List[CandlesConfig]): A list of configurations for the candles data feed.
     """
-    id: str = Field(default=None,)
+    id: str = Field(..., description="Unique identifier for the controller. Required.")
     controller_name: str
     controller_type: str = "generic"
     total_amount_quote: Decimal = Field(
@@ -55,13 +54,6 @@ class ControllerConfigBase(BaseClientModel):
             "is_updatable": False
         })
     model_config = ConfigDict(arbitrary_types_allowed=True)
-
-    @field_validator('id', mode="before")
-    @classmethod
-    def set_id(cls, v):
-        if v is None or v.strip() == "":
-            return generate_unique_id()
-        return v
 
     @field_validator('candles_config', mode="before")
     @classmethod
