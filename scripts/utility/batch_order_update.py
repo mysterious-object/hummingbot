@@ -2,9 +2,9 @@ from collections import defaultdict
 from decimal import Decimal
 from typing import List
 
-from hummingbot.connector.utils import combine_to_hb_trading_pair
-from hummingbot.core.data_type.limit_order import LimitOrder
-from hummingbot.strategy.script_strategy_base import ScriptStrategyBase
+from chimerabot.connector.utils import combine_to_hb_trading_pair
+from chimerabot.core.data_type.limit_order import LimitOrder
+from chimerabot.strategy.script_strategy_base import ScriptStrategyBase
 
 CONNECTOR = "dexalot_avalanche_dexalot"
 BASE = "AVAX"

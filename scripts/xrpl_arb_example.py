@@ -7,16 +7,16 @@ from typing import Any, Dict
 import pandas as pd
 from pydantic import Field
 
-from hummingbot.client.config.config_data_types import BaseClientModel
-from hummingbot.connector.connector_base import ConnectorBase
-from hummingbot.connector.exchange.xrpl.xrpl_exchange import XrplExchange
-from hummingbot.connector.exchange.xrpl.xrpl_utils import PoolInfo
-from hummingbot.connector.exchange_py_base import ExchangePyBase
-from hummingbot.core.data_type.common import OrderType, TradeType
-from hummingbot.core.data_type.order_candidate import OrderCandidate
-from hummingbot.core.event.events import OrderFilledEvent
-from hummingbot.core.utils.async_utils import safe_ensure_future
-from hummingbot.strategy.script_strategy_base import ScriptStrategyBase
+from chimerabot.client.config.config_data_types import BaseClientModel
+from chimerabot.connector.connector_base import ConnectorBase
+from chimerabot.connector.exchange.xrpl.xrpl_exchange import XrplExchange
+from chimerabot.connector.exchange.xrpl.xrpl_utils import PoolInfo
+from chimerabot.connector.exchange_py_base import ExchangePyBase
+from chimerabot.core.data_type.common import OrderType, TradeType
+from chimerabot.core.data_type.order_candidate import OrderCandidate
+from chimerabot.core.event.events import OrderFilledEvent
+from chimerabot.core.utils.async_utils import safe_ensure_future
+from chimerabot.strategy.script_strategy_base import ScriptStrategyBase
 
 
 class XRPLSimpleArbConfig(BaseClientModel):

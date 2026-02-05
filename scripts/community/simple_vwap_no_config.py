@@ -3,17 +3,17 @@ import math
 from decimal import Decimal
 from typing import Dict
 
-from hummingbot.connector.utils import split_hb_trading_pair
-from hummingbot.core.data_type.order_candidate import OrderCandidate
-from hummingbot.core.event.events import OrderFilledEvent, OrderType, TradeType
-from hummingbot.core.rate_oracle.rate_oracle import RateOracle
-from hummingbot.strategy.script_strategy_base import ScriptStrategyBase
+from chimerabot.connector.utils import split_hb_trading_pair
+from chimerabot.core.data_type.order_candidate import OrderCandidate
+from chimerabot.core.event.events import OrderFilledEvent, OrderType, TradeType
+from chimerabot.core.rate_oracle.rate_oracle import RateOracle
+from chimerabot.strategy.script_strategy_base import ScriptStrategyBase
 
 
 class VWAPExample(ScriptStrategyBase):
     """
     BotCamp Cohort: Sept 2022
-    Design Template: https://hummingbot-foundation.notion.site/Simple-VWAP-Example-d43a929cc5bd45c6b1a72f63e6635618
+    Design Template: https://chimerabot-foundation.notion.site/Simple-VWAP-Example-d43a929cc5bd45c6b1a72f63e6635618
     Video: -
     Description:
     This example lets you create one VWAP in a market using a percentage of the sum volume of the order book
@@ -136,7 +136,7 @@ class VWAPExample(ScriptStrategyBase):
 
     def did_fill_order(self, event: OrderFilledEvent):
         """
-         Listens to fill order event to log it and notify the Hummingbot application.
+         Listens to fill order event to log it and notify the ChimeraBot application.
          """
         if event.trading_pair == self.vwap["trading_pair"] and event.trade_type == self.vwap["trade_type"]:
             self.vwap["volume_remaining"] -= event.amount

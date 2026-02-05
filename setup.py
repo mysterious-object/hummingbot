@@ -24,17 +24,17 @@ class BuildExt(build_ext):
 def main():
     cpu_count = os.cpu_count() or 8
     version = "20260126"
-    all_packages = find_packages(include=["hummingbot", "hummingbot.*"], )
+    all_packages = find_packages(include=["chimerabot", "chimerabot.*"], )
     excluded_paths = [
-        "hummingbot.connector.gateway.clob_spot.data_sources.injective",
-        "hummingbot.connector.gateway.clob_perp.data_sources.injective_perpetual"
+        "chimerabot.connector.gateway.clob_spot.data_sources.injective",
+        "chimerabot.connector.gateway.clob_perp.data_sources.injective_perpetual"
     ]
     packages = [
         pkg for pkg in all_packages
         if not any(fnmatch.fnmatch(pkg, pattern) for pattern in excluded_paths)
     ]
     package_data = {
-        "hummingbot": [
+        "chimerabot": [
             "core/cpp/*",
             "VERSION",
             "templates/*TEMPLATE.yml"
@@ -110,7 +110,7 @@ def main():
     if is_posix:
         cython_kwargs["nthreads"] = cpu_count
 
-    cython_sources = ["hummingbot/**/*.pyx"]
+    cython_sources = ["chimerabot/**/*.pyx"]
 
     compiler_directives = {
         "annotation_typing": False,
@@ -126,7 +126,7 @@ def main():
         package_data[""] = [
             "*.pxd", "*.pyx", "*.h"
         ]
-        package_data["hummingbot"].append("core/cpp/*.cpp")
+        package_data["chimerabot"].append("core/cpp/*.cpp")
 
     if len(sys.argv) > 1 and sys.argv[1] == "build_ext" and is_posix:
         sys.argv.append(f"--parallel={cpu_count}")
@@ -144,12 +144,12 @@ def main():
 
     # --- 4. Pass the modified extensions to setup ---
     setup(
-        name="hummingbot",
+        name="chimerabot",
         version=version,
-        description="Hummingbot",
-        url="https://github.com/hummingbot/hummingbot",
-        author="Hummingbot Foundation",
-        author_email="dev@hummingbot.org",
+        description="ChimeraBot",
+        url="https://github.com/chimerabot/chimerabot",
+        author="ChimeraBot Foundation",
+        author_email="dev@chimerabot.org",
         license="Apache 2.0",
         packages=packages,
         package_data=package_data,
@@ -159,7 +159,7 @@ def main():
             np.get_include()
         ],
         scripts=[
-            "bin/hummingbot_quickstart.py"
+            "bin/chimerabot_quickstart.py"
         ],
         cmdclass={"build_ext": BuildExt},
     )

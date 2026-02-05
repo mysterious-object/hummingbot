@@ -2,13 +2,13 @@ import os
 from decimal import Decimal
 from typing import Dict, List, Optional, Set
 
-from hummingbot.client.hummingbot_application import HummingbotApplication
-from hummingbot.connector.connector_base import ConnectorBase
-from hummingbot.core.event.events import MarketOrderFailureEvent
-from hummingbot.data_feed.candles_feed.data_types import CandlesConfig
-from hummingbot.strategy.strategy_v2_base import StrategyV2Base, StrategyV2ConfigBase
-from hummingbot.strategy_v2.models.base import RunnableStatus
-from hummingbot.strategy_v2.models.executor_actions import CreateExecutorAction, StopExecutorAction
+from chimerabot.client.chimerabot_application import ChimeraBotApplication
+from chimerabot.connector.connector_base import ConnectorBase
+from chimerabot.core.event.events import MarketOrderFailureEvent
+from chimerabot.data_feed.candles_feed.data_types import CandlesConfig
+from chimerabot.strategy.strategy_v2_base import StrategyV2Base, StrategyV2ConfigBase
+from chimerabot.strategy_v2.models.base import RunnableStatus
+from chimerabot.strategy_v2.models.executor_actions import CreateExecutorAction, StopExecutorAction
 
 
 class V2WithControllersConfig(StrategyV2ConfigBase):
@@ -86,7 +86,7 @@ class V2WithControllers(StrategyV2Base):
                 self.drawdown_exited_controllers.extend(list(self.controllers.keys()))
                 self.logger().info("Global drawdown reached. Stopping the strategy.")
                 self._is_stop_triggered = True
-                HummingbotApplication.main_application().stop()
+                ChimeraBotApplication.main_application().stop()
 
     def get_controller_report(self, controller_id: str) -> dict:
         """
@@ -126,7 +126,7 @@ class V2WithControllers(StrategyV2Base):
         )
         if not active_executors:
             self.logger().info("All executors have finalized their execution. Stopping the strategy.")
-            HummingbotApplication.main_application().stop()
+            ChimeraBotApplication.main_application().stop()
         else:
             non_trading_executors = self.filter_executors(
                 executors=active_executors,

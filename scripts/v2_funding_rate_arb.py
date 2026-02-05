@@ -5,15 +5,15 @@ from typing import Dict, List, Set
 import pandas as pd
 from pydantic import Field, field_validator
 
-from hummingbot.client.ui.interface_utils import format_df_for_printout
-from hummingbot.connector.connector_base import ConnectorBase
-from hummingbot.core.clock import Clock
-from hummingbot.core.data_type.common import OrderType, PositionAction, PositionMode, PriceType, TradeType
-from hummingbot.core.event.events import FundingPaymentCompletedEvent
-from hummingbot.data_feed.candles_feed.data_types import CandlesConfig
-from hummingbot.strategy.strategy_v2_base import StrategyV2Base, StrategyV2ConfigBase
-from hummingbot.strategy_v2.executors.position_executor.data_types import PositionExecutorConfig, TripleBarrierConfig
-from hummingbot.strategy_v2.models.executor_actions import CreateExecutorAction, StopExecutorAction
+from chimerabot.client.ui.interface_utils import format_df_for_printout
+from chimerabot.connector.connector_base import ConnectorBase
+from chimerabot.core.clock import Clock
+from chimerabot.core.data_type.common import OrderType, PositionAction, PositionMode, PriceType, TradeType
+from chimerabot.core.event.events import FundingPaymentCompletedEvent
+from chimerabot.data_feed.candles_feed.data_types import CandlesConfig
+from chimerabot.strategy.strategy_v2_base import StrategyV2Base, StrategyV2ConfigBase
+from chimerabot.strategy_v2.executors.position_executor.data_types import PositionExecutorConfig, TripleBarrierConfig
+from chimerabot.strategy_v2.models.executor_actions import CreateExecutorAction, StopExecutorAction
 
 
 class FundingRateArbitrageConfig(StrategyV2ConfigBase):

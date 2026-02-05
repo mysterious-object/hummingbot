@@ -1,11 +1,11 @@
 from decimal import Decimal
 from typing import Dict
 
-from hummingbot.client.ui.interface_utils import format_df_for_printout
-from hummingbot.connector.connector_base import ConnectorBase
-from hummingbot.core.data_type.common import OrderType
-from hummingbot.data_feed.wallet_tracker_data_feed import WalletTrackerDataFeed
-from hummingbot.strategy.script_strategy_base import ScriptStrategyBase
+from chimerabot.client.ui.interface_utils import format_df_for_printout
+from chimerabot.connector.connector_base import ConnectorBase
+from chimerabot.core.data_type.common import OrderType
+from chimerabot.data_feed.wallet_tracker_data_feed import WalletTrackerDataFeed
+from chimerabot.strategy.script_strategy_base import ScriptStrategyBase
 
 
 class WalletHedgeExample(ScriptStrategyBase):

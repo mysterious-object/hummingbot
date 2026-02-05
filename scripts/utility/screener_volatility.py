@@ -1,11 +1,11 @@
 import pandas as pd
 import pandas_ta as ta  # noqa: F401
 
-from hummingbot.client.ui.interface_utils import format_df_for_printout
-from hummingbot.connector.connector_base import ConnectorBase, Dict
-from hummingbot.data_feed.candles_feed.candles_factory import CandlesFactory
-from hummingbot.data_feed.candles_feed.data_types import CandlesConfig
-from hummingbot.strategy.script_strategy_base import ScriptStrategyBase
+from chimerabot.client.ui.interface_utils import format_df_for_printout
+from chimerabot.connector.connector_base import ConnectorBase, Dict
+from chimerabot.data_feed.candles_feed.candles_factory import CandlesFactory
+from chimerabot.data_feed.candles_feed.data_types import CandlesConfig
+from chimerabot.strategy.script_strategy_base import ScriptStrategyBase
 
 
 class VolatilityScreener(ScriptStrategyBase):

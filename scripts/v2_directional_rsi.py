@@ -5,13 +5,13 @@ from typing import Dict, List, Optional
 import pandas_ta as ta  # noqa: F401
 from pydantic import Field, field_validator
 
-from hummingbot.connector.connector_base import ConnectorBase
-from hummingbot.core.clock import Clock
-from hummingbot.core.data_type.common import OrderType, PositionMode, PriceType, TradeType
-from hummingbot.data_feed.candles_feed.candles_factory import CandlesConfig
-from hummingbot.strategy.strategy_v2_base import StrategyV2Base, StrategyV2ConfigBase
-from hummingbot.strategy_v2.executors.position_executor.data_types import PositionExecutorConfig, TripleBarrierConfig
-from hummingbot.strategy_v2.models.executor_actions import CreateExecutorAction, StopExecutorAction
+from chimerabot.connector.connector_base import ConnectorBase
+from chimerabot.core.clock import Clock
+from chimerabot.core.data_type.common import OrderType, PositionMode, PriceType, TradeType
+from chimerabot.data_feed.candles_feed.candles_factory import CandlesConfig
+from chimerabot.strategy.strategy_v2_base import StrategyV2Base, StrategyV2ConfigBase
+from chimerabot.strategy_v2.executors.position_executor.data_types import PositionExecutorConfig, TripleBarrierConfig
+from chimerabot.strategy_v2.models.executor_actions import CreateExecutorAction, StopExecutorAction
 
 
 class SimpleDirectionalRSIConfig(StrategyV2ConfigBase):

@@ -7,14 +7,14 @@ from typing import Deque, Dict, List
 import pandas as pd
 import pandas_ta as ta  # noqa: F401
 
-from hummingbot import data_path
-from hummingbot.connector.connector_base import ConnectorBase
-from hummingbot.core.data_type.common import OrderType, PositionAction, PositionMode, PositionSide, TradeType
-from hummingbot.data_feed.candles_feed.candles_factory import CandlesFactory
-from hummingbot.data_feed.candles_feed.data_types import CandlesConfig
-from hummingbot.strategy.script_strategy_base import ScriptStrategyBase
-from hummingbot.strategy_v2.executors.position_executor.data_types import PositionExecutorConfig, TripleBarrierConfig
-from hummingbot.strategy_v2.executors.position_executor.position_executor import PositionExecutor
+from chimerabot import data_path
+from chimerabot.connector.connector_base import ConnectorBase
+from chimerabot.core.data_type.common import OrderType, PositionAction, PositionMode, PositionSide, TradeType
+from chimerabot.data_feed.candles_feed.candles_factory import CandlesFactory
+from chimerabot.data_feed.candles_feed.data_types import CandlesConfig
+from chimerabot.strategy.script_strategy_base import ScriptStrategyBase
+from chimerabot.strategy_v2.executors.position_executor.data_types import PositionExecutorConfig, TripleBarrierConfig
+from chimerabot.strategy_v2.executors.position_executor.position_executor import PositionExecutor
 
 
 class MACDBBDirectionalStrategy(ScriptStrategyBase):

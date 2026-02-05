@@ -5,13 +5,13 @@ from typing import Dict, List, Optional, Set
 
 from pydantic import Field, field_validator
 
-from hummingbot.connector.connector_base import ConnectorBase
-from hummingbot.connector.perpetual_derivative_py_base import PerpetualDerivativePyBase
-from hummingbot.core.clock import Clock
-from hummingbot.core.data_type.funding_info import FundingInfo
-from hummingbot.data_feed.candles_feed.data_types import CandlesConfig
-from hummingbot.strategy.strategy_v2_base import StrategyV2Base, StrategyV2ConfigBase
-from hummingbot.strategy_v2.models.executor_actions import CreateExecutorAction, StopExecutorAction
+from chimerabot.connector.connector_base import ConnectorBase
+from chimerabot.connector.perpetual_derivative_py_base import PerpetualDerivativePyBase
+from chimerabot.core.clock import Clock
+from chimerabot.core.data_type.funding_info import FundingInfo
+from chimerabot.data_feed.candles_feed.data_types import CandlesConfig
+from chimerabot.strategy.strategy_v2_base import StrategyV2Base, StrategyV2ConfigBase
+from chimerabot.strategy_v2.models.executor_actions import CreateExecutorAction, StopExecutorAction
 
 
 class DynamicOrderbookDemoConfig(StrategyV2ConfigBase):

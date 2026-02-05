@@ -8,12 +8,12 @@ from typing import Dict, Union
 
 from pydantic import Field
 
-from hummingbot.client.config.config_data_types import BaseClientModel
-from hummingbot.connector.connector_base import ConnectorBase
-from hummingbot.connector.gateway.common_types import ConnectorType, get_connector_type
-from hummingbot.connector.gateway.gateway_lp import AMMPoolInfo, AMMPositionInfo, CLMMPoolInfo, CLMMPositionInfo
-from hummingbot.core.utils.async_utils import safe_ensure_future
-from hummingbot.strategy.script_strategy_base import ScriptStrategyBase
+from chimerabot.client.config.config_data_types import BaseClientModel
+from chimerabot.connector.connector_base import ConnectorBase
+from chimerabot.connector.gateway.common_types import ConnectorType, get_connector_type
+from chimerabot.connector.gateway.gateway_lp import AMMPoolInfo, AMMPositionInfo, CLMMPoolInfo, CLMMPositionInfo
+from chimerabot.core.utils.async_utils import safe_ensure_future
+from chimerabot.strategy.script_strategy_base import ScriptStrategyBase
 
 
 class LpPositionManagerConfig(BaseClientModel):
@@ -543,7 +543,7 @@ class LpPositionManager(ScriptStrategyBase):
             self.notify_hb_app_with_timestamp(msg)
 
     def format_status(self) -> str:
-        """Format status message for display in Hummingbot"""
+        """Format status message for display in ChimeraBot"""
         lines = []
 
         if self.position_closed:

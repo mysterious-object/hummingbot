@@ -6,11 +6,11 @@ from typing import Dict, Optional
 import pandas as pd
 from pydantic import Field
 
-from hummingbot.client.config.config_data_types import BaseClientModel
-from hummingbot.client.ui.interface_utils import format_df_for_printout
-from hummingbot.connector.connector_base import ConnectorBase
-from hummingbot.data_feed.amm_gateway_data_feed import AmmGatewayDataFeed
-from hummingbot.strategy.script_strategy_base import ScriptStrategyBase
+from chimerabot.client.config.config_data_types import BaseClientModel
+from chimerabot.client.ui.interface_utils import format_df_for_printout
+from chimerabot.connector.connector_base import ConnectorBase
+from chimerabot.data_feed.amm_gateway_data_feed import AmmGatewayDataFeed
+from chimerabot.strategy.script_strategy_base import ScriptStrategyBase
 
 
 class AMMDataFeedConfig(BaseClientModel):
@@ -62,9 +62,9 @@ class AMMDataFeedExample(ScriptStrategyBase):
         )
 
         # Create data directory if it doesn't exist
-        # Use hummingbot root directory (2 levels up from scripts/)
-        hummingbot_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-        self.data_dir = os.path.join(hummingbot_root, "data")
+        # Use chimerabot root directory (2 levels up from scripts/)
+        chimerabot_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        self.data_dir = os.path.join(chimerabot_root, "data")
         os.makedirs(self.data_dir, exist_ok=True)
 
         # Set file name

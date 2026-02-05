@@ -4,16 +4,16 @@ from datetime import datetime
 import numpy as np
 import pandas as pd
 
-from hummingbot import data_path
-from hummingbot.data_feed.candles_feed.candles_factory import CandlesFactory
-from hummingbot.data_feed.candles_feed.data_types import CandlesConfig
-from hummingbot.strategy.script_strategy_base import ScriptStrategyBase
+from chimerabot import data_path
+from chimerabot.data_feed.candles_feed.candles_factory import CandlesFactory
+from chimerabot.data_feed.candles_feed.data_types import CandlesConfig
+from chimerabot.strategy.script_strategy_base import ScriptStrategyBase
 
 
 class BacktestMM(ScriptStrategyBase):
     """
     BotCamp Cohort: 4
-    Design Template: https://www.notion.so/hummingbot-foundation/Backtestable-Market-Making-Stategy-95c0d17e4042485bb90b7b2914af7f68?pvs=4
+    Design Template: https://www.notion.so/chimerabot-foundation/Backtestable-Market-Making-Stategy-95c0d17e4042485bb90b7b2914af7f68?pvs=4
     Video: https://www.loom.com/share/e18380429e9443ceb1ef86eb131c14a2
     Description: This bot implements a simpler backtester for a market making strategy using the Binance candles feed.
     After processing the user-defined backtesting parameters through historical OHLCV candles, it calculates a summary

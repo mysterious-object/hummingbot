@@ -4,14 +4,14 @@ from typing import List, Optional
 import pandas_ta as ta  # noqa: F401
 from pydantic import Field, field_validator
 
-from hummingbot.core.data_type.common import TradeType
-from hummingbot.data_feed.candles_feed.data_types import CandlesConfig
-from hummingbot.strategy_v2.controllers.market_making_controller_base import (
+from chimerabot.core.data_type.common import TradeType
+from chimerabot.data_feed.candles_feed.data_types import CandlesConfig
+from chimerabot.strategy_v2.controllers.market_making_controller_base import (
     MarketMakingControllerBase,
     MarketMakingControllerConfigBase,
 )
-from hummingbot.strategy_v2.executors.dca_executor.data_types import DCAExecutorConfig, DCAMode
-from hummingbot.strategy_v2.models.executor_actions import ExecutorAction, StopExecutorAction
+from chimerabot.strategy_v2.executors.dca_executor.data_types import DCAExecutorConfig, DCAMode
+from chimerabot.strategy_v2.models.executor_actions import ExecutorAction, StopExecutorAction
 
 
 class DManMakerV2Config(MarketMakingControllerConfigBase):

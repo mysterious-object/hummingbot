@@ -1,21 +1,21 @@
 services:
-  hummingbot:
-    container_name: hummingbot
-    image: hummingbot/hummingbot:latest
-    # build: # Uncomment this build section and comment image to build Hummingbot locally
+  chimerabot:
+    container_name: chimerabot
+    image: chimerabot/chimerabot:latest
+    # build: # Uncomment this build section and comment image to build ChimeraBot locally
     #   context: .
     #   dockerfile: Dockerfile
     volumes:
-      - ./conf:/home/hummingbot/conf
-      - ./conf/connectors:/home/hummingbot/conf/connectors
-      - ./conf/strategies:/home/hummingbot/conf/strategies
-      - ./conf/controllers:/home/hummingbot/conf/controllers
-      - ./conf/scripts:/home/hummingbot/conf/scripts
-      - ./logs:/home/hummingbot/logs
-      - ./data:/home/hummingbot/data
-      - ./certs:/home/hummingbot/certs
-      - ./scripts:/home/hummingbot/scripts
-      - ./controllers:/home/hummingbot/controllers
+      - ./conf:/home/chimerabot/conf
+      - ./conf/connectors:/home/chimerabot/conf/connectors
+      - ./conf/strategies:/home/chimerabot/conf/strategies
+      - ./conf/controllers:/home/chimerabot/conf/controllers
+      - ./conf/scripts:/home/chimerabot/conf/scripts
+      - ./logs:/home/chimerabot/logs
+      - ./data:/home/chimerabot/data
+      - ./certs:/home/chimerabot/certs
+      - ./scripts:/home/chimerabot/scripts
+      - ./controllers:/home/chimerabot/controllers
     logging:
       driver: "json-file"
       options:
@@ -32,8 +32,8 @@ services:
   gateway:
    profiles: ["gateway"]
    restart: always
-   container_name: gateway
-   image: hummingbot/gateway:latest
+   container_name: chimerabot-gateway
+   image: chimerabot/gateway:latest
    ports:
      - "15888:15888"
    volumes:

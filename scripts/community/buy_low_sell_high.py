@@ -2,14 +2,14 @@ from collections import deque
 from decimal import Decimal
 from statistics import mean
 
-from hummingbot.core.data_type.common import OrderType
-from hummingbot.strategy.script_strategy_base import ScriptStrategyBase
+from chimerabot.core.data_type.common import OrderType
+from chimerabot.strategy.script_strategy_base import ScriptStrategyBase
 
 
 class BuyLowSellHigh(ScriptStrategyBase):
     """
     BotCamp Cohort: Sept 2022
-    Design Template: https://hummingbot-foundation.notion.site/Buy-low-sell-high-35b89d84f0d94d379951a98f97179053
+    Design Template: https://chimerabot-foundation.notion.site/Buy-low-sell-high-35b89d84f0d94d379951a98f97179053
     Video: -
     Description:
     The script will be calculating the MA for a certain pair, and will execute a buy_order at the golden cross

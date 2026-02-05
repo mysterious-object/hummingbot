@@ -1,4 +1,4 @@
-name: hummingbot
+name: chimerabot
 channels:
   - conda-forge
   - defaults

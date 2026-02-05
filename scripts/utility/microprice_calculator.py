@@ -7,7 +7,7 @@ import numpy as np
 import pandas as pd
 from scipy.linalg import block_diag
 
-from hummingbot.strategy.script_strategy_base import ScriptStrategyBase
+from chimerabot.strategy.script_strategy_base import ScriptStrategyBase
 
 
 class MicropricePMM(ScriptStrategyBase):

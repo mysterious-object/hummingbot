@@ -1,11 +1,11 @@
 import logging
 from decimal import Decimal
 
-from hummingbot.client.hummingbot_application import HummingbotApplication
-from hummingbot.core.data_type.common import OrderType
-from hummingbot.core.rate_oracle.rate_oracle import RateOracle
-from hummingbot.strategy.script_strategy_base import ScriptStrategyBase
-from hummingbot.strategy.strategy_py_base import (
+from chimerabot.client.chimerabot_application import ChimeraBotApplication
+from chimerabot.core.data_type.common import OrderType
+from chimerabot.core.rate_oracle.rate_oracle import RateOracle
+from chimerabot.strategy.script_strategy_base import ScriptStrategyBase
+from chimerabot.strategy.strategy_py_base import (
     BuyOrderCompletedEvent,
     BuyOrderCreatedEvent,
     OrderFilledEvent,
@@ -16,7 +16,7 @@ from hummingbot.strategy.strategy_py_base import (
 
 class SimpleOrder(ScriptStrategyBase):
     """
-    This example script places an order on a Hummingbot exchange connector. The user can select the
+    This example script places an order on a ChimeraBot exchange connector. The user can select the
     order type (market or limit), side (buy or sell) and the spread (for limit orders only).
     The bot uses the Rate Oracle to convert the order amount in USD to the base amount for the exchange and trading pair.
     The script uses event handlers to notify the user when the order is created and completed, and then stops the bot.
@@ -74,7 +74,7 @@ class SimpleOrder(ScriptStrategyBase):
         msg = (f"{event.trade_type.name} {event.amount} of {event.trading_pair} {self.exchange} at {event.price}")
         self.log_with_clock(logging.INFO, msg)
         self.notify_hb_app_with_timestamp(msg)
-        HummingbotApplication.main_application().stop()
+        ChimeraBotApplication.main_application().stop()
 
     def did_complete_buy_order(self, event: BuyOrderCompletedEvent):
         msg = (f"Order {event.order_id} to buy {event.base_asset_amount} of {event.base_asset} is completed.")

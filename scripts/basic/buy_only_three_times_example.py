@@ -1,10 +1,10 @@
 from decimal import Decimal
 
-from hummingbot.client.hummingbot_application import HummingbotApplication
-from hummingbot.core.data_type.common import OrderType
-from hummingbot.core.event.events import BuyOrderCreatedEvent
-from hummingbot.core.rate_oracle.rate_oracle import RateOracle
-from hummingbot.strategy.script_strategy_base import ScriptStrategyBase
+from chimerabot.client.chimerabot_application import ChimeraBotApplication
+from chimerabot.core.data_type.common import OrderType
+from chimerabot.core.event.events import BuyOrderCreatedEvent
+from chimerabot.core.rate_oracle.rate_oracle import RateOracle
+from chimerabot.strategy.script_strategy_base import ScriptStrategyBase
 
 
 class BuyOnlyThreeTimesExample(ScriptStrategyBase):
@@ -41,4 +41,4 @@ class BuyOnlyThreeTimesExample(ScriptStrategyBase):
             self.orders_created += 1
             if self.orders_created == self.orders_to_create:
                 self.logger().info("All order created !")
-                HummingbotApplication.main_application().stop()
+                ChimeraBotApplication.main_application().stop()

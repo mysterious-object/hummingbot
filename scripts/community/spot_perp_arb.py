@@ -4,11 +4,11 @@ from decimal import Decimal
 from enum import Enum
 from typing import Dict, List
 
-from hummingbot.connector.connector_base import ConnectorBase
-from hummingbot.connector.utils import split_hb_trading_pair
-from hummingbot.core.data_type.common import OrderType, PositionAction, PositionMode
-from hummingbot.core.event.events import BuyOrderCompletedEvent, PositionModeChangeEvent, SellOrderCompletedEvent
-from hummingbot.strategy.script_strategy_base import ScriptStrategyBase
+from chimerabot.connector.connector_base import ConnectorBase
+from chimerabot.connector.utils import split_hb_trading_pair
+from chimerabot.core.data_type.common import OrderType, PositionAction, PositionMode
+from chimerabot.core.event.events import BuyOrderCompletedEvent, PositionModeChangeEvent, SellOrderCompletedEvent
+from chimerabot.strategy.script_strategy_base import ScriptStrategyBase
 
 
 class StrategyState(Enum):
@@ -32,7 +32,7 @@ class SpotPerpArb(ScriptStrategyBase):
     2. better to empty your position in perp
     3. check you have set one way mode (instead of hedge mode) in your futures account
 
-    REFERENCE: hummingbot/strategy/spot_perpetual_arbitrage
+    REFERENCE: chimerabot/strategy/spot_perpetual_arbitrage
     """
 
     spot_connector = "kucoin"

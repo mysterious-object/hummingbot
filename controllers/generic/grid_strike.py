@@ -3,14 +3,14 @@ from typing import List, Optional
 
 from pydantic import Field
 
-from hummingbot.core.data_type.common import MarketDict, OrderType, PositionMode, PriceType, TradeType
-from hummingbot.data_feed.candles_feed.data_types import CandlesConfig
-from hummingbot.strategy_v2.controllers import ControllerBase, ControllerConfigBase
-from hummingbot.strategy_v2.executors.data_types import ConnectorPair
-from hummingbot.strategy_v2.executors.grid_executor.data_types import GridExecutorConfig
-from hummingbot.strategy_v2.executors.position_executor.data_types import TripleBarrierConfig
-from hummingbot.strategy_v2.models.executor_actions import CreateExecutorAction, ExecutorAction
-from hummingbot.strategy_v2.models.executors_info import ExecutorInfo
+from chimerabot.core.data_type.common import MarketDict, OrderType, PositionMode, PriceType, TradeType
+from chimerabot.data_feed.candles_feed.data_types import CandlesConfig
+from chimerabot.strategy_v2.controllers import ControllerBase, ControllerConfigBase
+from chimerabot.strategy_v2.executors.data_types import ConnectorPair
+from chimerabot.strategy_v2.executors.grid_executor.data_types import GridExecutorConfig
+from chimerabot.strategy_v2.executors.position_executor.data_types import TripleBarrierConfig
+from chimerabot.strategy_v2.models.executor_actions import CreateExecutorAction, ExecutorAction
+from chimerabot.strategy_v2.models.executors_info import ExecutorInfo
 
 
 class GridStrikeConfig(ControllerConfigBase):

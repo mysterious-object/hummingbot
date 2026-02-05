@@ -1,8 +1,8 @@
 from decimal import Decimal
 
-from hummingbot.data_feed.candles_feed.candles_factory import CandlesFactory
-from hummingbot.data_feed.candles_feed.data_types import CandlesConfig
-from hummingbot.strategy.directional_strategy_base import DirectionalStrategyBase
+from chimerabot.data_feed.candles_feed.candles_factory import CandlesFactory
+from chimerabot.data_feed.candles_feed.data_types import CandlesConfig
+from chimerabot.strategy.directional_strategy_base import DirectionalStrategyBase
 
 
 class RSISpot(DirectionalStrategyBase):

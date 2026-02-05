@@ -1,12 +1,12 @@
 import os
 from typing import Dict
 
-from hummingbot import data_path
-from hummingbot.client.hummingbot_application import HummingbotApplication
-from hummingbot.connector.connector_base import ConnectorBase
-from hummingbot.data_feed.candles_feed.candles_factory import CandlesFactory
-from hummingbot.data_feed.candles_feed.data_types import CandlesConfig
-from hummingbot.strategy.script_strategy_base import ScriptStrategyBase
+from chimerabot import data_path
+from chimerabot.client.chimerabot_application import ChimeraBotApplication
+from chimerabot.connector.connector_base import ConnectorBase
+from chimerabot.data_feed.candles_feed.candles_factory import CandlesFactory
+from chimerabot.data_feed.candles_feed.data_types import CandlesConfig
+from chimerabot.strategy.script_strategy_base import ScriptStrategyBase
 
 
 class DownloadCandles(ScriptStrategyBase):
@@ -55,7 +55,7 @@ class DownloadCandles(ScriptStrategyBase):
                 df = candles_info["candles"].candles_df
                 df.to_csv(candles_info["csv_path"], index=False)
         if all(candles_info["candles"].ready for candles_info in self.candles.values()):
-            HummingbotApplication.main_application().stop()
+            ChimeraBotApplication.main_application().stop()
 
     async def on_stop(self):
         for candles_info in self.candles.values():

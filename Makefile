@@ -14,12 +14,12 @@ endif
 test:
 	coverage run -m pytest \
  	--ignore="test/mock" \
- 	--ignore="test/hummingbot/connector/exchange/ndax/" \
- 	--ignore="test/hummingbot/connector/derivative/dydx_v4_perpetual/" \
- 	--ignore="test/hummingbot/remote_iface/" \
+ 	--ignore="test/chimerabot/connector/exchange/ndax/" \
+ 	--ignore="test/chimerabot/connector/derivative/dydx_v4_perpetual/" \
+ 	--ignore="test/chimerabot/remote_iface/" \
  	--ignore="test/connector/utilities/oms_connector/" \
- 	--ignore="test/hummingbot/strategy/amm_arb/" \
- 	--ignore="test/hummingbot/strategy/cross_exchange_market_making/" \
+ 	--ignore="test/chimerabot/strategy/amm_arb/" \
+ 	--ignore="test/chimerabot/strategy/cross_exchange_market_making/" \
 
 run_coverage: test
 	coverage report
@@ -34,36 +34,36 @@ development-diff-cover:
 	diff-cover --compare-branch=origin/development coverage.xml
 
 build:
-	git clean -xdf && make clean && docker build -t hummingbot/hummingbot${TAG} -f Dockerfile .
+	git clean -xdf && make clean && docker build -t chimerabot/chimerabot${TAG} -f Dockerfile .
 
 
 uninstall:
-	conda env remove -n hummingbot -y
+	conda env remove -n chimerabot -y
 
 install:
 	@mkdir -p logs
 	@echo "Using env file: $(ENV_FILE)"
-	@if conda env list | awk '{print $$1}' | grep -qx hummingbot; then \
-		conda env update -n hummingbot -f "$(ENV_FILE)"; \
+	@if conda env list | awk '{print $$1}' | grep -qx chimerabot; then \
+		conda env update -n chimerabot -f "$(ENV_FILE)"; \
 	else \
-		conda env create -n hummingbot -f "$(ENV_FILE)"; \
+		conda env create -n chimerabot -f "$(ENV_FILE)"; \
 	fi
 	@if [ "$$(uname)" = "Darwin" ]; then \
-		conda install -n hummingbot -y appnope; \
+		conda install -n chimerabot -y appnope; \
 	fi
-	@conda run -n hummingbot conda develop .
-	@conda run -n hummingbot python -m pip install --no-deps -r setup/pip_packages.txt > logs/pip_install.log 2>&1
-	@conda run -n hummingbot pre-commit install
+	@conda run -n chimerabot conda develop .
+	@conda run -n chimerabot python -m pip install --no-deps -r setup/pip_packages.txt > logs/pip_install.log 2>&1
+	@conda run -n chimerabot pre-commit install
 	@if [ "$$(uname)" = "Linux" ] && command -v dpkg >/dev/null 2>&1; then \
 		if ! dpkg -s build-essential >/dev/null 2>&1; then \
 			echo "build-essential not found, installing..."; \
 			sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get install -y build-essential; \
 		fi; \
 	fi
-	@conda run -n hummingbot --no-capture-output python setup.py build_ext --inplace
+	@conda run -n chimerabot --no-capture-output python setup.py build_ext --inplace
 
 run:
-	conda run -n hummingbot --no-capture-output ./bin/hummingbot_quickstart.py $(ARGS)
+	conda run -n chimerabot --no-capture-output ./bin/chimerabot_quickstart.py $(ARGS)
 
 setup:
 	@read -r -p "Include Gateway? [y/N] " ans; \

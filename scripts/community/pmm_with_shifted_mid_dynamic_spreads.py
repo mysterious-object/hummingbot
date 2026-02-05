@@ -4,18 +4,18 @@ from typing import Dict, List
 
 import pandas_ta as ta  # noqa: F401
 
-from hummingbot.connector.connector_base import ConnectorBase
-from hummingbot.core.data_type.common import OrderType, PriceType, TradeType
-from hummingbot.core.data_type.order_candidate import OrderCandidate
-from hummingbot.core.event.events import BuyOrderCompletedEvent, OrderFilledEvent, SellOrderCompletedEvent
-from hummingbot.data_feed.candles_feed.candles_factory import CandlesFactory
-from hummingbot.data_feed.candles_feed.data_types import CandlesConfig
-from hummingbot.strategy.script_strategy_base import ScriptStrategyBase
+from chimerabot.connector.connector_base import ConnectorBase
+from chimerabot.core.data_type.common import OrderType, PriceType, TradeType
+from chimerabot.core.data_type.order_candidate import OrderCandidate
+from chimerabot.core.event.events import BuyOrderCompletedEvent, OrderFilledEvent, SellOrderCompletedEvent
+from chimerabot.data_feed.candles_feed.candles_factory import CandlesFactory
+from chimerabot.data_feed.candles_feed.data_types import CandlesConfig
+from chimerabot.strategy.script_strategy_base import ScriptStrategyBase
 
 
 class PMMhShiftedMidPriceDynamicSpread(ScriptStrategyBase):
     """
-    Design Template: https://hummingbot-foundation.notion.site/Simple-PMM-with-shifted-mid-price-and-dynamic-spreads-63cc765486dd42228d3da0b32537fc92
+    Design Template: https://chimerabot-foundation.notion.site/Simple-PMM-with-shifted-mid-price-and-dynamic-spreads-63cc765486dd42228d3da0b32537fc92
     Video: -
     Description:
     The bot will place two orders around the `reference_price` (mid price or last traded price +- %based on `RSI` value )

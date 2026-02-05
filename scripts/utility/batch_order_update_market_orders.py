@@ -2,10 +2,10 @@ import time
 from decimal import Decimal
 from typing import List
 
-from hummingbot.connector.utils import combine_to_hb_trading_pair
-from hummingbot.core.data_type.limit_order import LimitOrder
-from hummingbot.core.data_type.market_order import MarketOrder
-from hummingbot.strategy.script_strategy_base import ScriptStrategyBase
+from chimerabot.connector.utils import combine_to_hb_trading_pair
+from chimerabot.core.data_type.limit_order import LimitOrder
+from chimerabot.core.data_type.market_order import MarketOrder
+from chimerabot.strategy.script_strategy_base import ScriptStrategyBase
 
 CONNECTOR = "bybit"
 BASE = "ETH"

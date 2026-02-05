@@ -2,7 +2,7 @@
   import { onMount, onDestroy } from "svelte";
   import { backendStatus } from "../lib/stores/status";
   import { getHealth, type HealthStatus } from "../lib/api/health";
-  import { getHummingbotHealth, importStrategy, startHummingbot, stopHummingbot } from "../lib/api/hummingbot";
+  import { getChimeraBotHealth, importStrategy, startChimeraBot, stopChimeraBot } from "../lib/api/chimerabot";
   import { getStrategies } from "../lib/api/strategies";
   import { getLogs } from "../lib/api/logs";
   import { getEvents } from "../lib/api/events";
@@ -48,7 +48,7 @@
     error = "";
     try {
       health = await getHealth();
-      hbHealth = await getHummingbotHealth();
+      hbHealth = await getChimeraBotHealth();
       strategies = await getStrategies();
       logs = await getLogs(80);
       events = await getEvents();
@@ -78,7 +78,7 @@
       if (message.type !== "mqtt" || !message.topic) {
         return;
       }
-      if (message.topic === "hummingbot/logs" && message.payload) {
+      if (message.topic === "chimerabot/logs" && message.payload) {
         try {
           const payload = JSON.parse(message.payload);
           logs = [
@@ -97,7 +97,7 @@
           // ignore malformed payloads
         }
       }
-      if (message.topic === "hummingbot/events" && message.payload) {
+      if (message.topic === "chimerabot/events" && message.payload) {
         try {
           const payload = JSON.parse(message.payload);
           events = [
@@ -150,8 +150,8 @@
 
   const handleStart = async () => {
     try {
-      actionMessage = "Starting Hummingbot...";
-      const result = await startHummingbot();
+      actionMessage = "Starting ChimeraBot...";
+      const result = await startChimeraBot();
       if (result.runtime) {
         actionMessage = result.runtime.running
           ? "Headless runtime started."
@@ -166,8 +166,8 @@
 
   const handleStop = async () => {
     try {
-      actionMessage = "Stopping Hummingbot...";
-      const result = await stopHummingbot();
+      actionMessage = "Stopping ChimeraBot...";
+      const result = await stopChimeraBot();
       if (result.runtime) {
         actionMessage = result.runtime.running
           ? "Failed to stop headless runtime."
@@ -201,7 +201,7 @@
       <div class="meta">{health?.mqtt_error ?? (health?.mqtt_degraded ? "Degraded" : "Healthy")}</div>
     </div>
     <div class="status-card">
-      <div class="label">Hummingbot</div>
+      <div class="label">ChimeraBot</div>
       <div class="value">{hbHealth ? hbStatusLabel() : "Offline"}</div>
       <div class="meta">
         {#if hbHealth?.connected}
@@ -242,7 +242,7 @@
 
     <div class="panel">
       <h2>Strategies</h2>
-      <p>Choose a config or script to import into Hummingbot.</p>
+      <p>Choose a config or script to import into ChimeraBot.</p>
       {#if loading}
         <div class="empty">Loading strategies...</div>
       {:else if strategies.length === 0}

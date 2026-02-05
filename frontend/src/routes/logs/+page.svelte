@@ -21,7 +21,7 @@
     }
 
     socket = connectRealtime((message) => {
-      if (message.topic !== "hummingbot/logs" || !message.payload) {
+      if (message.topic !== "chimerabot/logs" || !message.payload) {
         return;
       }
       try {
@@ -54,7 +54,7 @@
 <section class="page">
   <header>
     <h1>Live Logs</h1>
-    <p>Streaming logs emitted by the Hummingbot runtime.</p>
+    <p>Streaming logs emitted by the ChimeraBot runtime.</p>
   </header>
 
   <div class="panel">

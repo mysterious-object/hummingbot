@@ -3,11 +3,11 @@ import os
 from datetime import datetime
 from typing import Dict
 
-from hummingbot import data_path
-from hummingbot.connector.connector_base import ConnectorBase
-from hummingbot.core.event.event_forwarder import SourceInfoEventForwarder
-from hummingbot.core.event.events import OrderBookEvent, OrderBookTradeEvent
-from hummingbot.strategy.script_strategy_base import ScriptStrategyBase
+from chimerabot import data_path
+from chimerabot.connector.connector_base import ConnectorBase
+from chimerabot.core.event.event_forwarder import SourceInfoEventForwarder
+from chimerabot.core.event.events import OrderBookEvent, OrderBookTradeEvent
+from chimerabot.strategy.script_strategy_base import ScriptStrategyBase
 
 
 class DownloadTradesAndOrderBookSnapshots(ScriptStrategyBase):

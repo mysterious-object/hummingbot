@@ -3,19 +3,19 @@ from typing import TYPE_CHECKING, Optional
 from unittest.mock import AsyncMock, MagicMock, patch
 
 if TYPE_CHECKING:
-    from hummingbot.client.ui.hummingbot_cli import HummingbotCLI
+    from chimerabot.client.ui.chimerabot_cli import ChimeraBotCLI
 
 
 class CLIMockingAssistant:
-    def __init__(self, app: "HummingbotCLI"):
+    def __init__(self, app: "ChimeraBotCLI"):
         self._app = app
         self._prompt_patch = patch(
-            "hummingbot.client.ui.hummingbot_cli.HummingbotCLI.prompt"
+            "chimerabot.client.ui.chimerabot_cli.ChimeraBotCLI.prompt"
         )
         self._prompt_mock: Optional[AsyncMock] = None
         self._prompt_replies = asyncio.Queue()
         self._log_patch = patch(
-            "hummingbot.client.ui.hummingbot_cli.HummingbotCLI.log"
+            "chimerabot.client.ui.chimerabot_cli.ChimeraBotCLI.log"
         )
         self._log_mock: Optional[MagicMock] = None
         self._log_calls = []

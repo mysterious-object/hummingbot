@@ -11,11 +11,11 @@ import websockets
 from aiohttp.test_utils import TestClient
 from websockets.exceptions import ConnectionClosed
 
-from hummingbot.core.data_type.order_book import OrderBook
-from hummingbot.core.data_type.order_book_message import OrderBookMessage
-from hummingbot.core.data_type.order_book_tracker_data_source import OrderBookTrackerDataSource
-from hummingbot.core.data_type.order_book_tracker_entry import OrderBookTrackerEntry
-from hummingbot.logger import HummingbotLogger
+from chimerabot.core.data_type.order_book import OrderBook
+from chimerabot.core.data_type.order_book_message import OrderBookMessage
+from chimerabot.core.data_type.order_book_tracker_data_source import OrderBookTrackerDataSource
+from chimerabot.core.data_type.order_book_tracker_entry import OrderBookTrackerEntry
+from chimerabot.logger import ChimeraBotLogger
 
 
 class MockAPIOrderBookDataSource(OrderBookTrackerDataSource):
@@ -23,10 +23,10 @@ class MockAPIOrderBookDataSource(OrderBookTrackerDataSource):
     MESSAGE_TIMEOUT = 30.0
     PING_TIMEOUT = 10.0
 
-    _maobds_logger: Optional[HummingbotLogger] = None
+    _maobds_logger: Optional[ChimeraBotLogger] = None
 
     @classmethod
-    def logger(cls) -> HummingbotLogger:
+    def logger(cls) -> ChimeraBotLogger:
         if cls._maobds_logger is None:
             cls._maobds_logger = logging.getLogger(__name__)
         return cls._maobds_logger

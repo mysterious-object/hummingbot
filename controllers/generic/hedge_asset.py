@@ -14,11 +14,11 @@ from typing import List
 
 from pydantic import Field
 
-from hummingbot.core.data_type.common import MarketDict, PositionAction, PositionMode, TradeType
-from hummingbot.data_feed.candles_feed.data_types import CandlesConfig
-from hummingbot.strategy_v2.controllers import ControllerBase, ControllerConfigBase
-from hummingbot.strategy_v2.executors.order_executor.data_types import ExecutionStrategy, OrderExecutorConfig
-from hummingbot.strategy_v2.models.executor_actions import CreateExecutorAction, ExecutorAction
+from chimerabot.core.data_type.common import MarketDict, PositionAction, PositionMode, TradeType
+from chimerabot.data_feed.candles_feed.data_types import CandlesConfig
+from chimerabot.strategy_v2.controllers import ControllerBase, ControllerConfigBase
+from chimerabot.strategy_v2.executors.order_executor.data_types import ExecutionStrategy, OrderExecutorConfig
+from chimerabot.strategy_v2.models.executor_actions import CreateExecutorAction, ExecutorAction
 
 
 class HedgeAssetConfig(ControllerConfigBase):

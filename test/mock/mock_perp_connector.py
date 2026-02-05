@@ -1,12 +1,12 @@
 from decimal import Decimal
 from typing import Optional
 
-from hummingbot.connector.derivative.perpetual_budget_checker import PerpetualBudgetChecker
-from hummingbot.connector.perpetual_trading import PerpetualTrading
-from hummingbot.connector.test_support.mock_paper_exchange import MockPaperExchange
-from hummingbot.core.data_type.common import OrderType, PositionAction, PositionMode, TradeType
-from hummingbot.core.data_type.trade_fee import AddedToCostTradeFee, TradeFeeSchema
-from hummingbot.core.utils.estimate_fee import build_perpetual_trade_fee
+from chimerabot.connector.derivative.perpetual_budget_checker import PerpetualBudgetChecker
+from chimerabot.connector.perpetual_trading import PerpetualTrading
+from chimerabot.connector.test_support.mock_paper_exchange import MockPaperExchange
+from chimerabot.core.data_type.common import OrderType, PositionAction, PositionMode, TradeType
+from chimerabot.core.data_type.trade_fee import AddedToCostTradeFee, TradeFeeSchema
+from chimerabot.core.utils.estimate_fee import build_perpetual_trade_fee
 
 
 class MockPerpConnector(MockPaperExchange, PerpetualTrading):

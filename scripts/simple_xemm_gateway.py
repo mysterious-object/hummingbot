@@ -5,15 +5,15 @@ from typing import Dict
 import pandas as pd
 from pydantic import Field
 
-from hummingbot.client.config.config_data_types import BaseClientModel
-from hummingbot.connector.connector_base import ConnectorBase
-from hummingbot.core.data_type.common import OrderType, TradeType
-from hummingbot.core.data_type.order_candidate import OrderCandidate
-from hummingbot.core.event.events import OrderFilledEvent
-from hummingbot.core.utils.async_utils import safe_ensure_future
-from hummingbot.data_feed.market_data_provider import MarketDataProvider
-from hummingbot.strategy.script_strategy_base import ScriptStrategyBase
-from hummingbot.strategy_v2.executors.data_types import ConnectorPair
+from chimerabot.client.config.config_data_types import BaseClientModel
+from chimerabot.connector.connector_base import ConnectorBase
+from chimerabot.core.data_type.common import OrderType, TradeType
+from chimerabot.core.data_type.order_candidate import OrderCandidate
+from chimerabot.core.event.events import OrderFilledEvent
+from chimerabot.core.utils.async_utils import safe_ensure_future
+from chimerabot.data_feed.market_data_provider import MarketDataProvider
+from chimerabot.strategy.script_strategy_base import ScriptStrategyBase
+from chimerabot.strategy_v2.executors.data_types import ConnectorPair
 
 
 class SimpleXEMMGatewayConfig(BaseClientModel):

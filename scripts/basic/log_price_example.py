@@ -1,4 +1,4 @@
-from hummingbot.strategy.script_strategy_base import ScriptStrategyBase
+from chimerabot.strategy.script_strategy_base import ScriptStrategyBase
 
 
 class LogPricesExample(ScriptStrategyBase):

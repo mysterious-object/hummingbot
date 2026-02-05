@@ -6,14 +6,14 @@ import pandas_ta as ta  # noqa: F401
 from pydantic import Field, field_validator
 from pydantic_core.core_schema import ValidationInfo
 
-from hummingbot.core.data_type.common import TradeType
-from hummingbot.data_feed.candles_feed.data_types import CandlesConfig
-from hummingbot.strategy_v2.controllers.directional_trading_controller_base import (
+from chimerabot.core.data_type.common import TradeType
+from chimerabot.data_feed.candles_feed.data_types import CandlesConfig
+from chimerabot.strategy_v2.controllers.directional_trading_controller_base import (
     DirectionalTradingControllerBase,
     DirectionalTradingControllerConfigBase,
 )
-from hummingbot.strategy_v2.executors.dca_executor.data_types import DCAExecutorConfig, DCAMode
-from hummingbot.strategy_v2.executors.position_executor.data_types import TrailingStop
+from chimerabot.strategy_v2.executors.dca_executor.data_types import DCAExecutorConfig, DCAMode
+from chimerabot.strategy_v2.executors.position_executor.data_types import TrailingStop
 
 
 class DManV3ControllerConfig(DirectionalTradingControllerConfigBase):

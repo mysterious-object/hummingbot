@@ -6,11 +6,11 @@ from typing import Dict
 
 from pydantic import Field
 
-from hummingbot.client.config.config_data_types import BaseClientModel
-from hummingbot.connector.connector_base import ConnectorBase
-from hummingbot.core.event.events import OrderFilledEvent
-from hummingbot.core.utils.async_utils import safe_ensure_future
-from hummingbot.strategy.script_strategy_base import ScriptStrategyBase
+from chimerabot.client.config.config_data_types import BaseClientModel
+from chimerabot.connector.connector_base import ConnectorBase
+from chimerabot.core.event.events import OrderFilledEvent
+from chimerabot.core.utils.async_utils import safe_ensure_future
+from chimerabot.strategy.script_strategy_base import ScriptStrategyBase
 
 
 class DEXTradeConfig(BaseClientModel):
@@ -204,7 +204,7 @@ class DEXTrade(ScriptStrategyBase):
         self.notify_hb_app_with_timestamp(msg)
 
     def format_status(self) -> str:
-        """Format status message for display in Hummingbot"""
+        """Format status message for display in ChimeraBot"""
         if self.trade_executed:
             lines = []
             lines.append(f"Exchange: {self.config.connector}")

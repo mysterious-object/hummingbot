@@ -1,8 +1,8 @@
 from decimal import Decimal
 
-from hummingbot.connector.exchange_base import ExchangeBase
-from hummingbot.core.data_type.common import PriceType
-from hummingbot.strategy.asset_price_delegate import AssetPriceDelegate
+from chimerabot.connector.exchange_base import ExchangeBase
+from chimerabot.core.data_type.common import PriceType
+from chimerabot.strategy.asset_price_delegate import AssetPriceDelegate
 
 
 class MockAssetPriceDelegate(AssetPriceDelegate):

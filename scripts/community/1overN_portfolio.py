@@ -4,10 +4,10 @@ import math
 from decimal import Decimal
 from typing import Dict
 
-from hummingbot.connector.connector_base import ConnectorBase
-from hummingbot.core.data_type.common import OrderType
-from hummingbot.strategy.script_strategy_base import ScriptStrategyBase
-from hummingbot.strategy.strategy_py_base import (
+from chimerabot.connector.connector_base import ConnectorBase
+from chimerabot.core.data_type.common import OrderType
+from chimerabot.strategy.script_strategy_base import ScriptStrategyBase
+from chimerabot.strategy.strategy_py_base import (
     BuyOrderCompletedEvent,
     BuyOrderCreatedEvent,
     MarketOrderFailureEvent,
@@ -52,7 +52,7 @@ class OneOverNPortfolio(ScriptStrategyBase):
     base_currencies = ["BTC", "ETH", "POL", "XRP", "BNB", "ADA", "DOT", "LTC", "DOGE", "SOL"]
     pairs = {f"{currency}-USDT" for currency in base_currencies}
 
-    #: Define markets to instruct Hummingbot to create connectors on the exchanges and markets you need
+    #: Define markets to instruct ChimeraBot to create connectors on the exchanges and markets you need
     markets = {exchange_name: pairs}
     activeOrders = 0
 

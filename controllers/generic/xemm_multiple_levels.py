@@ -5,14 +5,14 @@ from typing import Dict, List, Optional, Set
 import pandas as pd
 from pydantic import Field, field_validator
 
-from hummingbot.client.ui.interface_utils import format_df_for_printout
-from hummingbot.core.data_type.common import PriceType, TradeType
-from hummingbot.core.gateway.gateway_http_client import GatewayHttpClient
-from hummingbot.data_feed.candles_feed.data_types import CandlesConfig
-from hummingbot.strategy_v2.controllers.controller_base import ControllerBase, ControllerConfigBase
-from hummingbot.strategy_v2.executors.data_types import ConnectorPair
-from hummingbot.strategy_v2.executors.xemm_executor.data_types import XEMMExecutorConfig
-from hummingbot.strategy_v2.models.executor_actions import CreateExecutorAction, ExecutorAction
+from chimerabot.client.ui.interface_utils import format_df_for_printout
+from chimerabot.core.data_type.common import PriceType, TradeType
+from chimerabot.core.gateway.gateway_http_client import GatewayHttpClient
+from chimerabot.data_feed.candles_feed.data_types import CandlesConfig
+from chimerabot.strategy_v2.controllers.controller_base import ControllerBase, ControllerConfigBase
+from chimerabot.strategy_v2.executors.data_types import ConnectorPair
+from chimerabot.strategy_v2.executors.xemm_executor.data_types import XEMMExecutorConfig
+from chimerabot.strategy_v2.models.executor_actions import CreateExecutorAction, ExecutorAction
 
 
 class XEMMMultipleLevelsConfig(ControllerConfigBase):

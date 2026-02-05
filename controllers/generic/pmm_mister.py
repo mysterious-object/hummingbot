@@ -4,12 +4,12 @@ from typing import Dict, List, Optional, Set, Tuple, Union
 from pydantic import Field, field_validator
 from pydantic_core.core_schema import ValidationInfo
 
-from hummingbot.core.data_type.common import MarketDict, OrderType, PositionMode, PriceType, TradeType
-from hummingbot.data_feed.candles_feed.data_types import CandlesConfig
-from hummingbot.strategy_v2.controllers.controller_base import ControllerBase, ControllerConfigBase
-from hummingbot.strategy_v2.executors.data_types import ConnectorPair
-from hummingbot.strategy_v2.executors.position_executor.data_types import PositionExecutorConfig, TripleBarrierConfig
-from hummingbot.strategy_v2.models.executor_actions import CreateExecutorAction, ExecutorAction, StopExecutorAction
+from chimerabot.core.data_type.common import MarketDict, OrderType, PositionMode, PriceType, TradeType
+from chimerabot.data_feed.candles_feed.data_types import CandlesConfig
+from chimerabot.strategy_v2.controllers.controller_base import ControllerBase, ControllerConfigBase
+from chimerabot.strategy_v2.executors.data_types import ConnectorPair
+from chimerabot.strategy_v2.executors.position_executor.data_types import PositionExecutorConfig, TripleBarrierConfig
+from chimerabot.strategy_v2.models.executor_actions import CreateExecutorAction, ExecutorAction, StopExecutorAction
 
 
 class PMMisterConfig(ControllerConfigBase):

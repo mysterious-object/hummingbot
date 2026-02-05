@@ -5,17 +5,17 @@ from typing import Dict
 
 from pydantic import Field
 
-from hummingbot.client.config.config_data_types import BaseClientModel
-from hummingbot.connector.connector_base import ConnectorBase
-from hummingbot.connector.exchange.xrpl.xrpl_exchange import XrplExchange
-from hummingbot.connector.exchange.xrpl.xrpl_utils import (
+from chimerabot.client.config.config_data_types import BaseClientModel
+from chimerabot.connector.connector_base import ConnectorBase
+from chimerabot.connector.exchange.xrpl.xrpl_exchange import XrplExchange
+from chimerabot.connector.exchange.xrpl.xrpl_utils import (
     AddLiquidityResponse,
     PoolInfo,
     QuoteLiquidityResponse,
     RemoveLiquidityResponse,
 )
-from hummingbot.core.utils.async_utils import safe_ensure_future
-from hummingbot.strategy.script_strategy_base import ScriptStrategyBase
+from chimerabot.core.utils.async_utils import safe_ensure_future
+from chimerabot.strategy.script_strategy_base import ScriptStrategyBase
 
 
 class XRPLTriggeredLiquidityConfig(BaseClientModel):
@@ -440,7 +440,7 @@ class XRPLTriggeredLiquidity(ScriptStrategyBase):
             self.logger().error(f"Error checking position balance: {str(e)}")
 
     def format_status(self) -> str:
-        """Format status message for display in Hummingbot"""
+        """Format status message for display in ChimeraBot"""
         if not self.connector_ready:
             return "Connector is not available. Please check your connection."
 

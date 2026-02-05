@@ -6,12 +6,12 @@ from typing import List
 
 import requests
 
-from hummingbot.connector.exchange_base import ExchangeBase
-from hummingbot.connector.utils import split_hb_trading_pair
-from hummingbot.core.data_type.order_candidate import OrderCandidate
-from hummingbot.core.event.events import OrderFilledEvent, OrderType, TradeType
-from hummingbot.core.rate_oracle.rate_oracle import RateOracle
-from hummingbot.strategy.script_strategy_base import ScriptStrategyBase
+from chimerabot.connector.exchange_base import ExchangeBase
+from chimerabot.connector.utils import split_hb_trading_pair
+from chimerabot.core.data_type.order_candidate import OrderCandidate
+from chimerabot.core.event.events import OrderFilledEvent, OrderType, TradeType
+from chimerabot.core.rate_oracle.rate_oracle import RateOracle
+from chimerabot.strategy.script_strategy_base import ScriptStrategyBase
 
 
 class BuyDipExample(ScriptStrategyBase):
@@ -89,7 +89,7 @@ class BuyDipExample(ScriptStrategyBase):
 
     def did_fill_order(self, event: OrderFilledEvent):
         """
-        Listens to fill order event to log it and notify the hummingbot application.
+        Listens to fill order event to log it and notify the chimerabot application.
         """
         msg = (f"({event.trading_pair}) {event.trade_type.name} order (price: {event.price}) of {event.amount} "
                f"{split_hb_trading_pair(event.trading_pair)[0]} is filled.")

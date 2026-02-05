@@ -2,16 +2,16 @@ import logging
 from decimal import Decimal
 from typing import List
 
-from hummingbot.core.data_type.common import OrderType, PriceType, TradeType
-from hummingbot.core.data_type.order_candidate import OrderCandidate
-from hummingbot.core.event.events import OrderFilledEvent
-from hummingbot.strategy.script_strategy_base import ScriptStrategyBase
+from chimerabot.core.data_type.common import OrderType, PriceType, TradeType
+from chimerabot.core.data_type.order_candidate import OrderCandidate
+from chimerabot.core.event.events import OrderFilledEvent
+from chimerabot.strategy.script_strategy_base import ScriptStrategyBase
 
 
 class SimplePMM(ScriptStrategyBase):
     """
     BotCamp Cohort: Sept 2022
-    Design Template: https://hummingbot-foundation.notion.site/Simple-PMM-63cc765486dd42228d3da0b32537fc92
+    Design Template: https://chimerabot-foundation.notion.site/Simple-PMM-63cc765486dd42228d3da0b32537fc92
     Video: -
     Description:
     The bot will place two orders around the price_source (mid price or last traded price) in a trading_pair on

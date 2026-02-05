@@ -1,6 +1,6 @@
 import logging
 
-from hummingbot.core.event.events import (
+from chimerabot.core.event.events import (
     BuyOrderCompletedEvent,
     BuyOrderCreatedEvent,
     MarketOrderFailureEvent,
@@ -9,14 +9,14 @@ from hummingbot.core.event.events import (
     SellOrderCompletedEvent,
     SellOrderCreatedEvent,
 )
-from hummingbot.strategy.script_strategy_base import Decimal, OrderType, ScriptStrategyBase
+from chimerabot.strategy.script_strategy_base import Decimal, OrderType, ScriptStrategyBase
 
 
 class DCAExample(ScriptStrategyBase):
     """
     This example shows how to set up a simple strategy to buy a token on fixed (dollar) amount on a regular basis
     """
-    #: Define markets to instruct Hummingbot to create connectors on the exchanges and markets you need
+    #: Define markets to instruct ChimeraBot to create connectors on the exchanges and markets you need
     markets = {"binance_paper_trade": {"BTC-USDT"}}
     #: The last time the strategy places a buy order
     last_ordered_ts = 0.

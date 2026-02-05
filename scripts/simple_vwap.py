@@ -6,12 +6,12 @@ from typing import Dict
 
 from pydantic import Field
 
-from hummingbot.client.config.config_data_types import BaseClientModel
-from hummingbot.connector.connector_base import ConnectorBase
-from hummingbot.connector.utils import split_hb_trading_pair
-from hummingbot.core.data_type.order_candidate import OrderCandidate
-from hummingbot.core.event.events import OrderFilledEvent, OrderType, TradeType
-from hummingbot.strategy.script_strategy_base import ScriptStrategyBase
+from chimerabot.client.config.config_data_types import BaseClientModel
+from chimerabot.connector.connector_base import ConnectorBase
+from chimerabot.connector.utils import split_hb_trading_pair
+from chimerabot.core.data_type.order_candidate import OrderCandidate
+from chimerabot.core.event.events import OrderFilledEvent, OrderType, TradeType
+from chimerabot.strategy.script_strategy_base import ScriptStrategyBase
 
 
 class VWAPConfig(BaseClientModel):
@@ -168,7 +168,7 @@ class VWAPExample(ScriptStrategyBase):
 
     def did_fill_order(self, event: OrderFilledEvent):
         """
-         Listens to fill order event to log it and notify the Hummingbot application.
+         Listens to fill order event to log it and notify the ChimeraBot application.
          """
         if event.trading_pair == self.vwap["trading_pair"] and event.trade_type == self.vwap["trade_type"]:
             self.vwap["volume_remaining"] -= event.amount

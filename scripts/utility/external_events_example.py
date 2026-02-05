@@ -1,6 +1,6 @@
-from hummingbot.core.event.events import BuyOrderCreatedEvent, MarketOrderFailureEvent, SellOrderCreatedEvent
-from hummingbot.remote_iface.mqtt import ExternalEventFactory, ExternalTopicFactory
-from hummingbot.strategy.script_strategy_base import Decimal, OrderType, ScriptStrategyBase
+from chimerabot.core.event.events import BuyOrderCreatedEvent, MarketOrderFailureEvent, SellOrderCreatedEvent
+from chimerabot.remote_iface.mqtt import ExternalEventFactory, ExternalTopicFactory
+from chimerabot.strategy.script_strategy_base import Decimal, OrderType, ScriptStrategyBase
 
 
 class ExternalEventsExample(ScriptStrategyBase):

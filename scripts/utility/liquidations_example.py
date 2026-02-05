@@ -1,9 +1,9 @@
 from typing import Dict
 
-from hummingbot.client.ui.interface_utils import format_df_for_printout
-from hummingbot.connector.connector_base import ConnectorBase
-from hummingbot.data_feed.liquidations_feed.liquidations_factory import LiquidationsConfig, LiquidationsFactory
-from hummingbot.strategy.script_strategy_base import ScriptStrategyBase
+from chimerabot.client.ui.interface_utils import format_df_for_printout
+from chimerabot.connector.connector_base import ConnectorBase
+from chimerabot.data_feed.liquidations_feed.liquidations_factory import LiquidationsConfig, LiquidationsFactory
+from chimerabot.strategy.script_strategy_base import ScriptStrategyBase
 
 
 class LiquidationsExample(ScriptStrategyBase):

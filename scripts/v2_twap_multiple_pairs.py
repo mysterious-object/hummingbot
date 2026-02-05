@@ -4,14 +4,14 @@ from typing import Dict, List, Set
 
 from pydantic import Field, field_validator
 
-from hummingbot.client.hummingbot_application import HummingbotApplication
-from hummingbot.connector.connector_base import ConnectorBase
-from hummingbot.core.clock import Clock
-from hummingbot.core.data_type.common import PositionMode, TradeType
-from hummingbot.data_feed.candles_feed.data_types import CandlesConfig
-from hummingbot.strategy.strategy_v2_base import StrategyV2Base, StrategyV2ConfigBase
-from hummingbot.strategy_v2.executors.twap_executor.data_types import TWAPExecutorConfig, TWAPMode
-from hummingbot.strategy_v2.models.executor_actions import CreateExecutorAction, ExecutorAction
+from chimerabot.client.chimerabot_application import ChimeraBotApplication
+from chimerabot.connector.connector_base import ConnectorBase
+from chimerabot.core.clock import Clock
+from chimerabot.core.data_type.common import PositionMode, TradeType
+from chimerabot.data_feed.candles_feed.data_types import CandlesConfig
+from chimerabot.strategy.strategy_v2_base import StrategyV2Base, StrategyV2ConfigBase
+from chimerabot.strategy_v2.executors.twap_executor.data_types import TWAPExecutorConfig, TWAPMode
+from chimerabot.strategy_v2.models.executor_actions import CreateExecutorAction, ExecutorAction
 
 
 class TWAPMultiplePairsConfig(StrategyV2ConfigBase):
@@ -112,4 +112,4 @@ class TWAPMultiplePairs(StrategyV2Base):
         all_executors = self.get_all_executors()
         if len(all_executors) > 0 and all([executor.is_done for executor in self.get_all_executors()]):
             self.logger().info("All TWAP executors have been completed.")
-            HummingbotApplication.main_application().stop()
+            ChimeraBotApplication.main_application().stop()

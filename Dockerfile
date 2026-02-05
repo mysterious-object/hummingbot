@@ -6,7 +6,7 @@ RUN apt-get update && \
     apt-get install -y sudo libusb-1.0 gcc g++ python3-dev && \
     rm -rf /var/lib/apt/lists/*
 
-WORKDIR /home/hummingbot
+WORKDIR /home/chimerabot
 
 # Create conda environment
 COPY setup/environment.yml /tmp/environment.yml
@@ -16,7 +16,7 @@ RUN conda env create -f /tmp/environment.yml && \
 
 # Copy remaining files
 COPY bin/ bin/
-COPY hummingbot/ hummingbot/
+COPY chimerabot/ chimerabot/
 COPY scripts/ scripts/
 COPY controllers/ controllers/
 COPY scripts/ scripts-copy/
@@ -24,9 +24,9 @@ COPY setup.py .
 COPY LICENSE .
 COPY README.md .
 
-# activate hummingbot env when entering the CT
+# activate chimerabot env when entering the CT
 SHELL [ "/bin/bash", "-lc" ]
-RUN echo "conda activate hummingbot" >> ~/.bashrc
+RUN echo "conda activate chimerabot" >> ~/.bashrc
 
 COPY setup/pip_packages.txt /tmp/pip_packages.txt
 RUN python3 -m pip install --no-deps -r /tmp/pip_packages.txt && \
@@ -42,7 +42,7 @@ RUN python3 setup.py build_ext --inplace -j 8 && \
 FROM continuumio/miniconda3:latest AS release
 
 # Dockerfile author / maintainer
-LABEL maintainer="Fede Cardoso @dardonacci <federico@hummingbot.org>"
+LABEL maintainer="ChimeraBot Team <dev@chimerabot.org>"
 
 # Build arguments
 ARG BRANCH=""
@@ -65,9 +65,9 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 # Create mount points
-RUN mkdir -p /home/hummingbot/conf /home/hummingbot/conf/connectors /home/hummingbot/conf/strategies /home/hummingbot/conf/controllers /home/hummingbot/conf/scripts /home/hummingbot/logs /home/hummingbot/data /home/hummingbot/certs /home/hummingbot/scripts /home/hummingbot/controllers
+RUN mkdir -p /home/chimerabot/conf /home/chimerabot/conf/connectors /home/chimerabot/conf/strategies /home/chimerabot/conf/controllers /home/chimerabot/conf/scripts /home/chimerabot/logs /home/chimerabot/data /home/chimerabot/certs /home/chimerabot/scripts /home/chimerabot/controllers
 
-WORKDIR /home/hummingbot
+WORKDIR /home/chimerabot
 
 # Copy all build artifacts from builder image
 COPY --from=builder /opt/conda/ /opt/conda/
@@ -78,4 +78,4 @@ SHELL [ "/bin/bash", "-lc" ]
 
 # Set the default command to run when starting the container
 
-CMD conda activate hummingbot && ./bin/hummingbot_quickstart.py 2>> ./logs/errors.log
+CMD conda activate chimerabot && ./bin/chimerabot_quickstart.py 2>> ./logs/errors.log
