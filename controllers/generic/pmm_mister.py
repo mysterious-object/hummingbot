@@ -7,6 +7,7 @@ from pydantic_core.core_schema import ValidationInfo
 from hummingbot.core.data_type.common import MarketDict, OrderType, PositionMode, PriceType, TradeType
 from hummingbot.data_feed.candles_feed.data_types import CandlesConfig
 from hummingbot.strategy_v2.controllers.controller_base import ControllerBase, ControllerConfigBase
+from hummingbot.strategy_v2.utils.common import parse_comma_separated_list, parse_enum_value
 from hummingbot.strategy_v2.executors.data_types import ConnectorPair
 from hummingbot.strategy_v2.executors.position_executor.data_types import PositionExecutorConfig, TripleBarrierConfig
 from hummingbot.strategy_v2.models.executor_actions import CreateExecutorAction, ExecutorAction, StopExecutorAction
@@ -48,6 +49,7 @@ class PMMisterConfig(ControllerConfigBase):
     take_profit_order_type: Optional[OrderType] = Field(default="LIMIT_MAKER", json_schema_extra={"is_updatable": True})
     max_active_executors_by_level: Optional[int] = Field(default=4, json_schema_extra={"is_updatable": True})
     tick_mode: bool = Field(default=False, json_schema_extra={"is_updatable": True})
+    position_profit_protection: bool = Field(default=False, json_schema_extra={"is_updatable": True})
 
     @field_validator("take_profit", mode="before")
     @classmethod
@@ -61,30 +63,14 @@ class PMMisterConfig(ControllerConfigBase):
     @field_validator('take_profit_order_type', mode="before")
     @classmethod
     def validate_order_type(cls, v) -> OrderType:
-        if isinstance(v, OrderType):
-            return v
-        elif v is None:
+        if v is None:
             return OrderType.MARKET
-        elif isinstance(v, str):
-            if v.upper() in OrderType.__members__:
-                return OrderType[v.upper()]
-        elif isinstance(v, int):
-            try:
-                return OrderType(v)
-            except ValueError:
-                pass
-        raise ValueError(f"Invalid order type: {v}. Valid options are: {', '.join(OrderType.__members__)}")
+        return parse_enum_value(OrderType, v, "take_profit_order_type")
 
     @field_validator('buy_spreads', 'sell_spreads', mode="before")
     @classmethod
     def parse_spreads(cls, v):
-        if v is None:
-            return []
-        if isinstance(v, str):
-            if v == "":
-                return []
-            return [float(x.strip()) for x in v.split(',')]
-        return v
+        return parse_comma_separated_list(v, "spreads")
 
     @field_validator('buy_amounts_pct', 'sell_amounts_pct', mode="before")
     @classmethod
@@ -93,21 +79,16 @@ class PMMisterConfig(ControllerConfigBase):
         if v is None or v == "":
             spread_field = field_name.replace('amounts_pct', 'spreads')
             return [1 for _ in validation_info.data[spread_field]]
-        if isinstance(v, str):
-            return [float(x.strip()) for x in v.split(',')]
-        elif isinstance(v, list) and len(v) != len(validation_info.data[field_name.replace('amounts_pct', 'spreads')]):
+        parsed = parse_comma_separated_list(v, field_name)
+        if isinstance(parsed, list) and len(parsed) != len(validation_info.data[field_name.replace('amounts_pct', 'spreads')]):
             raise ValueError(
                 f"The number of {field_name} must match the number of {field_name.replace('amounts_pct', 'spreads')}.")
-        return v
+        return parsed
 
     @field_validator('position_mode', mode="before")
     @classmethod
     def validate_position_mode(cls, v) -> PositionMode:
-        if isinstance(v, str):
-            if v.upper() in PositionMode.__members__:
-                return PositionMode[v.upper()]
-            raise ValueError(f"Invalid position mode: {v}. Valid options are: {', '.join(PositionMode.__members__)}")
-        return v
+        return parse_enum_value(PositionMode, v, "position_mode")
 
     @property
     def triple_barrier_config(self) -> TripleBarrierConfig:
@@ -410,6 +391,19 @@ class PMMister(ControllerBase):
             return buy_ids_missing
         elif current_pct > self.config.max_base_pct:
             return sell_ids_missing
+
+        # Position profit protection: filter based on breakeven
+        if self.config.position_profit_protection:
+            breakeven_price = self.processed_data.get("breakeven_price")
+            reference_price = self.processed_data["reference_price"]
+            target_pct = self.config.target_base_pct
+
+            if breakeven_price is not None and breakeven_price > 0:
+                if current_pct < target_pct and reference_price < breakeven_price:
+                    return buy_ids_missing  # Don't sell at a loss when underweight
+                elif current_pct > target_pct and reference_price > breakeven_price:
+                    return sell_ids_missing  # Don't buy more when overweight and in profit
+
         return buy_ids_missing + sell_ids_missing
 
     def analyze_all_levels(self) -> List[Dict]:
